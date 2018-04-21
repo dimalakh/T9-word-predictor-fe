@@ -1,9 +1,11 @@
+import './styles/app.sass'
+
 import React from 'react';
 import { render } from 'react-dom';
 
-import App from './components/app'
+import Screen from './components/screen'
 
 render(
-  <App />,
+  <Screen />,
   document.querySelector('#root')
 );
