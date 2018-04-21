@@ -3,9 +3,15 @@ import './styles.sass'
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const PredictionBar = ({ predictedWords = [] }) => {
+const PredictionBar = ({ predictedWords = [], onSelectPredictedWord }) => {
   const renderPredictedWords = () => predictedWords.map((word, index) =>
-    <div className='prediction-bar-item' key={index}>{word}</div>
+    <div
+      key={index}
+      onClick={() => onSelectPredictedWord(word)}
+      className='prediction-bar-item'
+    >
+      {word}
+    </div>
   )
 
   if (predictedWords.length === 0) return null
@@ -18,5 +24,6 @@ const PredictionBar = ({ predictedWords = [] }) => {
 export default PredictionBar
 
 PredictionBar.propTypes = {
-  predictedWords: PropTypes.array.isRequired
+  predictedWords: PropTypes.array.isRequired,
+  onSelectPredictedWord: PropTypes.func.isRequired
 }

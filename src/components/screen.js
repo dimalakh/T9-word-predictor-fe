@@ -55,9 +55,11 @@ class ScreenComponent extends Component {
     }
   }
 
-  saveToText () {
+  saveToText (passedWord) {
+    const textToSave = passedWord || this.state.currentWord
+
     this.setState({
-      typedText: this.state.typedText + this.state.currentWord + ' ',
+      typedText: this.state.typedText + textToSave + ' ',
       currentWord: '',
       currentSymbol: '',
       phraseLength: 0,
@@ -68,14 +70,18 @@ class ScreenComponent extends Component {
 
   render () {
     const textToDisplay = this.state.typedText + this.state.currentWord + this.state.currentSymbol
-
+    console.log(this.state)
     return <div className='screen'>
       <InputArea input={textToDisplay} />
-      <PredictionBar predictedWords={this.state.predictedWords} />
+      <PredictionBar
+        predictedWords={this.state.predictedWords}
+        onSelectPredictedWord={this.saveToText}
+      />
       <Keyboard
         onKeyPress={this.handleKeyPress}
         onKeyUp={this.handleKeyUp}
         onSpacePress={this.saveToText}
+        activeSymbol={this.state.currentSymbol}
       />
     </div>
   }
