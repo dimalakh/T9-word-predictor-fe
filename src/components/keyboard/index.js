@@ -1,31 +1,26 @@
 import './styles.sass'
+
 import React from 'react'
 
-const Key = ({ title, subtitle, onKeyPress }) =>
-  <div className='key' onClick={() => onKeyPress(subtitle)}>
-    <div className='key-content'>
-      <div className='key-title'>{ title }</div>
-      <div className='key-subtitle'>{ subtitle }</div>
-    </div>
-  </div>
+import Key from './key'
 
-const Keyboard = ({ onKeyPress }) => 
+const Keyboard = ({ onKeyPress, onKeyUp, onSpacePress }) => 
   <div className='keyboard'>
-    <Key title='1' subtitle='' onKeyPress={onKeyPress} />
-    <Key title='2' subtitle='ABC' onKeyPress={onKeyPress} />
-    <Key title='3' subtitle='DEF' onKeyPress={onKeyPress} />
+    <Key symbols='1' onKeyPress={onKeyPress} onKeyUp={onKeyUp} />
+    <Key symbols='2ABC' onKeyPress={onKeyPress} onKeyUp={onKeyUp} />
+    <Key symbols='3DEF' onKeyPress={onKeyPress} onKeyUp={onKeyUp} />
 
-    <Key title='4' subtitle='GHI' onKeyPress={onKeyPress} />
-    <Key title='5' subtitle='JKL' onKeyPress={onKeyPress} />
-    <Key title='6' subtitle='MNO' onKeyPress={onKeyPress} />
+    <Key symbols='4GHI' onKeyPress={onKeyPress} onKeyUp={onKeyUp} />
+    <Key symbols='5JKL' onKeyPress={onKeyPress} onKeyUp={onKeyUp} />
+    <Key symbols='6MNO' onKeyPress={onKeyPress} onKeyUp={onKeyUp} />
 
-    <Key title='7' subtitle='PQRS' onKeyPress={onKeyPress} />
-    <Key title='8' subtitle='TUV' onKeyPress={onKeyPress} />
-    <Key title='9' subtitle='WXYZ' onKeyPress={onKeyPress} />
+    <Key symbols='7PQRS' onKeyPress={onKeyPress} onKeyUp={onKeyUp} />
+    <Key symbols='8TUV' onKeyPress={onKeyPress} onKeyUp={onKeyUp} />
+    <Key symbols='9WXYZ' onKeyPress={onKeyPress} onKeyUp={onKeyUp} />
 
-    <Key title='*' subtitle='' onKeyPress={onKeyPress} />
-    <Key title='0' subtitle=' ' onKeyPress={onKeyPress} />
-    <Key title='#' subtitle='' onKeyPress={onKeyPress} />
+    <Key symbols='*' onKeyPress={onKeyPress} onKeyUp={onKeyUp} />
+    <Key symbols='0' onKeyPress={onKeyPress} onKeyUp={onKeyUp} onSpacePress={onSpacePress}/>
+    <Key symbols='#' onKeyPress={onKeyPress} onKeyUp={onKeyUp} />
   </div>
 
 export default Keyboard

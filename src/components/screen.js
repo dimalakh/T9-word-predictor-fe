@@ -12,17 +12,17 @@ class ScreenComponent extends Component {
     super(props)
     this.state = {
       typedText: '',
+      currentWord: '',
+      currentSymbol: '',
       phraseLetters: '',
       phraseLength: 0,
       predictedWords: []
     }
 
     this.handleKeyPress = this.handleKeyPress.bind(this)
+    this.handleKeyUp = this.handleKeyUp.bind(this)
     this.getPredictedWords = this.getPredictedWords.bind(this)
-  }
-
-  componentDidCatch(error) {
-    console.log('error', error)
+    this.saveToText = this.saveToText.bind(this)
   }
 
   getPredictedWords(phrase, phraseLength) {
@@ -32,20 +32,50 @@ class ScreenComponent extends Component {
       )
   }
 
-  handleKeyPress(keyLetters) {
+  handleKeyPress(currentSymbol = '') {
     this.setState({
-      phraseLetters: this.state.phraseLetters + keyLetters,
-      phraseLength: ++this.state.phraseLength
+      currentSymbol: currentSymbol
     })
+  }
 
-    this.getPredictedWords(this.state.phraseLetters + keyLetters, ++this.state.phraseLength)
+  handleKeyUp(keyLetters = ''){
+    this.setState({
+      currentWord: this.state.currentWord + this.state.currentSymbol,
+      phraseLength: ++this.state.phraseLength,
+      phraseLetters: this.state.phraseLetters + keyLetters,
+      currentSymbol: ''
+    })
+  
+    if(!!(this.state.phraseLetters + keyLetters)) {
+      this.getPredictedWords(
+        this.state.phraseLetters 
+        + keyLetters, this.state.phraseLength
+      )
+    }
+  }
+
+  saveToText(){
+    this.setState({
+      typedText: this.state.typedText + this.state.currentWord + ' ',
+      currentWord: '',
+      currentSymbol: '',
+      phraseLength: 0,
+      phraseLetters: '',
+      predictedWords: []
+    })
   }
 
   render() {
+    const textToDisplay = this.state.typedText + this.state.currentWord + this.state.currentSymbol
+
     return <div className='screen'>
-      <InputArea input={this.state.phraseLetters}/>
+      <InputArea input={textToDisplay}/>
       <PredictionBar predictedWords={this.state.predictedWords}/>
-      <Keyboard onKeyPress={this.handleKeyPress} />
+      <Keyboard 
+        onKeyPress={this.handleKeyPress} 
+        onKeyUp={this.handleKeyUp}
+        onSpacePress={this.saveToText}
+      />
     </div>
   }
 }
