@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-
+import PropTypes from 'prop-types'
 class Key extends Component {
-  constructor(props){
+  constructor (props) {
     super(props)
     this.state = {
       pressed: false
@@ -13,28 +13,28 @@ class Key extends Component {
     this.handleKeyUp = this.handleKeyUp.bind(this)
   }
 
-  handleKeyPress() {
+  handleKeyPress () {
     const { symbols, onKeyPress, onSpacePress } = this.props
 
     this.setState({ pressed: true })
     onKeyPress(symbols[this.counter])
 
-    if(!this.intervalId){
+    if (!this.intervalId) {
       this.intervalId = setInterval(() => {
         this.counter += 1
-        if(this.title === '0') {
+        if (this.title === '0') {
           onSpacePress()
         } else {
-          if(this.counter === symbols.length) {
+          if (this.counter === symbols.length) {
             this.counter = 0
           }
           onKeyPress(symbols[this.counter])
         }
-      }, 500) 
+      }, 500)
     }
   }
 
-  handleKeyUp(){
+  handleKeyUp () {
     this.setState({ pressed: false })
     if (this.intervalId) {
       clearInterval(this.intervalId)
@@ -48,8 +48,7 @@ class Key extends Component {
     this.intervalId = null
   }
 
-  
-  render() {
+  render () {
     return <div className='key' onMouseDown={this.handleKeyPress} onMouseUp={this.handleKeyUp}>
       <div className='key-content'>
         <div className='key-title'>{ this.title }</div>
@@ -60,3 +59,10 @@ class Key extends Component {
 }
 
 export default Key
+
+Key.propTypes = {
+  onKeyUp: PropTypes.func.isRequired,
+  onKeyPress: PropTypes.func.isRequired,
+  onSpacePress: PropTypes.func,
+  symbols: PropTypes.string.isRequired
+}

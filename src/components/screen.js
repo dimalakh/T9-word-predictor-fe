@@ -8,7 +8,7 @@ import PredictionBar from './predictionBar'
 import { predictWords } from '../services/words'
 
 class ScreenComponent extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
       typedText: '',
@@ -25,36 +25,37 @@ class ScreenComponent extends Component {
     this.saveToText = this.saveToText.bind(this)
   }
 
-  getPredictedWords(phrase, phraseLength) {
+  getPredictedWords (phrase, phraseLength) {
     predictWords(phrase, phraseLength)
-      .then(data => 
+      .then(data =>
         this.setState({ predictedWords: data.realWords })
       )
   }
 
-  handleKeyPress(currentSymbol = '') {
+  handleKeyPress (currentSymbol = '') {
     this.setState({
       currentSymbol: currentSymbol
     })
   }
 
-  handleKeyUp(keyLetters = ''){
+  handleKeyUp (keyLetters = '') {
     this.setState({
       currentWord: this.state.currentWord + this.state.currentSymbol,
       phraseLength: ++this.state.phraseLength,
       phraseLetters: this.state.phraseLetters + keyLetters,
       currentSymbol: ''
     })
-  
-    if(!!(this.state.phraseLetters + keyLetters)) {
+
+    const phraseLetters = this.state.phraseLetters + keyLetters
+
+    if (phraseLetters) {
       this.getPredictedWords(
-        this.state.phraseLetters 
-        + keyLetters, this.state.phraseLength
+        this.state.phraseLetters + keyLetters, this.state.phraseLength
       )
     }
   }
 
-  saveToText(){
+  saveToText () {
     this.setState({
       typedText: this.state.typedText + this.state.currentWord + ' ',
       currentWord: '',
@@ -65,14 +66,14 @@ class ScreenComponent extends Component {
     })
   }
 
-  render() {
+  render () {
     const textToDisplay = this.state.typedText + this.state.currentWord + this.state.currentSymbol
 
     return <div className='screen'>
-      <InputArea input={textToDisplay}/>
-      <PredictionBar predictedWords={this.state.predictedWords}/>
-      <Keyboard 
-        onKeyPress={this.handleKeyPress} 
+      <InputArea input={textToDisplay} />
+      <PredictionBar predictedWords={this.state.predictedWords} />
+      <Keyboard
+        onKeyPress={this.handleKeyPress}
         onKeyUp={this.handleKeyUp}
         onSpacePress={this.saveToText}
       />

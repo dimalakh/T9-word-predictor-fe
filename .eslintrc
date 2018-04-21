@@ -1,0 +1,28 @@
+{
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module",
+        "ecmaFeatures": {
+          "jsx": true
+        }
+    },
+
+    "extends": [
+        "standard", 
+        "standard-react"
+    ],
+
+    "env": {
+        "browser": true,
+        "es6": true,
+        "jest": true
+    },
+
+    "globals": {
+        "ENV": false
+    },
+
+    "plugins": [
+      "react"
+    ]
+}
