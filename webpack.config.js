@@ -1,10 +1,10 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const path = require('path')
 
 module.exports = {
   entry: './src/app.js',
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, './build'),
     filename: 'app.bundle.js'
   },
   module: {
@@ -40,4 +40,4 @@ module.exports = {
       inject: 'body'
     })
   ]
-};
+}
