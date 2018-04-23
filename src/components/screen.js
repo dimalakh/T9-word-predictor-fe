@@ -70,8 +70,10 @@ class ScreenComponent extends Component {
 
   removeLastSymbol () {
     const text = this.state.typedText + this.state.currentWord + this.state.currentSymbol
+    const deleteStep = this.state.currentSymbol ? 2 : 1
+
     this.setState({
-      typedText: text.substring(0, text.length - 2),
+      typedText: text.substring(0, text.length - deleteStep),
       ...initialState
     })
   }
