@@ -10,6 +10,7 @@ It is simple react app which allows user:
 + to enter the number, press the button once
 + to enter a letter press the button for a few secconds
 + to enter a space, press the 0 button for one second
-+ to use one of the predicted words, just click on it
++ to use one of the predicted words just click on it
++ to remove last character press the # button for one second
 
 ### [DEMO](https://dimalakh.github.io/T9-word-predictor-fe/)
