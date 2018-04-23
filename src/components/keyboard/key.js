@@ -55,6 +55,8 @@ class Key extends Component {
       onMouseDown={this.handleKeyPress}
       onMouseUp={this.handleKeyUp}
       onMouseLeave={this.reset}
+      onTouchStart={this.handleKeyPress}
+      onTouchEnd={this.handleKeyUp}
     >
       <div className='key-content'>
         <div className='key-title'>{ this.title }</div>
