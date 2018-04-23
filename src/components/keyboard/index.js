@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 import Key from './key'
 
-const Keyboard = ({ onKeyPress, onKeyUp, onSpacePress }) =>
+const Keyboard = ({ onKeyPress, onKeyUp, onSpacePress, removeLastSymbol }) =>
   <div className='keyboard'>
     <Key symbols='1' onKeyPress={onKeyPress} onKeyUp={onKeyUp} />
     <Key symbols='2ABC' onKeyPress={onKeyPress} onKeyUp={onKeyUp} />
@@ -21,7 +21,7 @@ const Keyboard = ({ onKeyPress, onKeyUp, onSpacePress }) =>
 
     <Key symbols='*' onKeyPress={onKeyPress} onKeyUp={onKeyUp} />
     <Key symbols='0' onKeyPress={onKeyPress} onKeyUp={onKeyUp} onSpacePress={onSpacePress} />
-    <Key symbols='#' onKeyPress={onKeyPress} onKeyUp={onKeyUp} />
+    <Key symbols='#' onKeyPress={onKeyPress} onKeyUp={onKeyUp} onRemove={removeLastSymbol} />
   </div>
 
 export default Keyboard
@@ -29,5 +29,6 @@ export default Keyboard
 Keyboard.propTypes = {
   onKeyPress: PropTypes.func.isRequired,
   onKeyUp: PropTypes.func.isRequired,
-  onSpacePress: PropTypes.func
+  onSpacePress: PropTypes.func,
+  removeLastSymbol: PropTypes.func
 }

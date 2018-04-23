@@ -20,7 +20,7 @@ class Key extends Component {
   }
 
   handleKeyPress () {
-    const { symbols, onKeyPress, onSpacePress } = this.props
+    const { symbols, onKeyPress, onSpacePress, onRemove } = this.props
 
     onKeyPress(symbols[this.counter])
 
@@ -29,6 +29,8 @@ class Key extends Component {
         this.counter += 1
         if (this.title === '0') {
           onSpacePress()
+        } else if (this.title === '#') {
+          onRemove()
         } else {
           if (this.counter === symbols.length) {
             this.counter = 0
@@ -68,5 +70,6 @@ Key.propTypes = {
   onKeyUp: PropTypes.func.isRequired,
   onKeyPress: PropTypes.func.isRequired,
   onSpacePress: PropTypes.func,
-  symbols: PropTypes.string.isRequired
+  symbols: PropTypes.string.isRequired,
+  onRemove: PropTypes.func
 }

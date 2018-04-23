@@ -7,22 +7,26 @@ import InputArea from './inputArea'
 import PredictionBar from './predictionBar'
 import { predictWords } from '../services/words'
 
+const initialState = {
+  currentWord: '',
+  currentSymbol: '',
+  phraseLength: 0,
+  phraseLetters: '',
+  predictedWords: []
+}
 class ScreenComponent extends Component {
   constructor (props) {
     super(props)
     this.state = {
       typedText: '',
-      currentWord: '',
-      currentSymbol: '',
-      phraseLetters: '',
-      phraseLength: 0,
-      predictedWords: []
+      ...initialState
     }
 
     this.handleKeyPress = this.handleKeyPress.bind(this)
     this.handleKeyUp = this.handleKeyUp.bind(this)
     this.getPredictedWords = this.getPredictedWords.bind(this)
     this.saveToText = this.saveToText.bind(this)
+    this.removeLastSymbol = this.removeLastSymbol.bind(this)
   }
 
   getPredictedWords (phrase, phraseLength) {
@@ -60,11 +64,15 @@ class ScreenComponent extends Component {
 
     this.setState({
       typedText: this.state.typedText + textToSave + ' ',
-      currentWord: '',
-      currentSymbol: '',
-      phraseLength: 0,
-      phraseLetters: '',
-      predictedWords: []
+      ...initialState
+    })
+  }
+
+  removeLastSymbol () {
+    const text = this.state.typedText + this.state.currentWord + this.state.currentSymbol
+    this.setState({
+      typedText: text.substring(0, text.length - 2),
+      ...initialState
     })
   }
 
@@ -82,6 +90,7 @@ class ScreenComponent extends Component {
         onKeyUp={this.handleKeyUp}
         onSpacePress={this.saveToText}
         activeSymbol={this.state.currentSymbol}
+        removeLastSymbol={this.removeLastSymbol}
       />
     </div>
   }
