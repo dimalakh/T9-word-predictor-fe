@@ -1,3 +1,3 @@
-export const predictWords = (phrase, phraseLength) =>
-  fetch(`http://localhost:8080/api/${phrase}?length=${phraseLength}`)
+export const predictWords = (phraseLetters, phraseLength) =>
+  fetch(`https://t9-prediction.herokuapp.com/api/predictedWords/${phraseLetters}/${phraseLength}?list_length=10`)
     .then(res => res.json())

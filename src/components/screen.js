@@ -27,8 +27,8 @@ class ScreenComponent extends Component {
 
   getPredictedWords (phrase, phraseLength) {
     predictWords(phrase, phraseLength)
-      .then(data =>
-        this.setState({ predictedWords: data.realWords })
+      .then(({ data }) =>
+        this.setState({ predictedWords: data })
       )
   }
 
@@ -70,7 +70,7 @@ class ScreenComponent extends Component {
 
   render () {
     const textToDisplay = this.state.typedText + this.state.currentWord + this.state.currentSymbol
-    console.log(this.state)
+
     return <div className='screen'>
       <InputArea input={textToDisplay} />
       <PredictionBar
