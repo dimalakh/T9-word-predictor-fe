@@ -1,0 +1,1 @@
+[![Build Status](https://travis-ci.org/dimalakh/T9-word-predictor-fe.svg?branch=master)](https://travis-ci.org/dimalakh/T9-word-predictor-fe)
