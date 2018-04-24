@@ -45,6 +45,7 @@ class Key extends Component {
     if (this.title === '0' && this.counter === 1) {
       return
     }
+
     this.reset()
     this.props.onKeyUp(this.subtitle)
   }
