@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const path = require('path')
+const webpack = require('webpack')
 
 module.exports = {
   entry: './src/app.js',
@@ -37,7 +38,14 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'T9 keyboard',
       template: 'src/index.html',
-      inject: 'body'
-    })
+      inject: 'body',
+      minify: {
+        collapseWhitespace: true,
+        collapseInlineTagWhitespace: true,
+        removeComments: true,
+        removeRedundantAttributes: true
+      }
+    }),
+    new webpack.optimize.UglifyJsPlugin()
   ]
 }
