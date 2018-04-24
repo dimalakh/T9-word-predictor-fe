@@ -35,7 +35,7 @@ class Key extends Component {
           if (this.counter === symbols.length) {
             this.counter = 0
           }
-          onKeyPress(symbols[this.counter])
+          onKeyPress(symbols[this.counter].toLowerCase())
         }
       }, 500)
     }
