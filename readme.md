@@ -14,3 +14,6 @@ It is simple react app which allows user:
 + to remove last character press the # button for one second
 
 ### [DEMO](https://dimalakh.github.io/T9-word-predictor-fe/)
+
+### [RN APP](https://github.com/dimalakh/T9-word-predictor-rn)
+### [BACKEND](https://github.com/dimalakh/T9-word-predictor)
