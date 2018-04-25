@@ -1,3 +1,9 @@
-export const predictWords = (phraseLetters, phraseLength) =>
-  fetch(`https://t9-prediction.herokuapp.com/api/predictedWords/${phraseLetters}/${phraseLength}?list_length=10`)
-    .then(res => res.json())
+export const predictWords = (phraseCode) =>
+  fetch(`https://t9-prediction.herokuapp.com/api/predictedWords/${phraseCode}/?list_length=10`)
+    .then(res => {
+      if (!res.ok) {
+        throw new Error(res.statusText)
+      }
+
+      return res.json()
+    })

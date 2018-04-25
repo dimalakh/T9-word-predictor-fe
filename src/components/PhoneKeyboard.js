@@ -10,8 +10,7 @@ import { predictWords } from '../services/words'
 const initialState = {
   currentWord: '',
   currentSymbol: '',
-  phraseLength: 0,
-  phraseLetters: '',
+  phraseCode: '',
   predictedWords: []
 }
 class ScreenComponent extends Component {
@@ -29,11 +28,14 @@ class ScreenComponent extends Component {
     this.removeLastSymbol = this.removeLastSymbol.bind(this)
   }
 
-  getPredictedWords (phrase, phraseLength) {
-    predictWords(phrase, phraseLength)
+  getPredictedWords (phraseCode) {
+    predictWords(phraseCode)
       .then(({ data }) =>
         this.setState({ predictedWords: data })
       )
+      .catch(err => {
+        this.setState({ error: err.message })
+      })
   }
 
   handleKeyPress (currentSymbol = '') {
@@ -42,20 +44,19 @@ class ScreenComponent extends Component {
     })
   }
 
-  handleKeyUp (keyLetters = '') {
+  handleKeyUp (keyNumber = '') {
     this.setState({
       currentWord: this.state.currentWord + this.state.currentSymbol,
-      phraseLength: ++this.state.phraseLength,
-      phraseLetters: this.state.phraseLetters + keyLetters,
+      phraseCode: this.state.phraseCode + keyNumber,
       currentSymbol: ''
     })
 
-    const phraseLetters = this.state.phraseLetters + keyLetters
+    const phraseCode = this.state.phraseCode + keyNumber
 
-    if (phraseLetters) {
-      this.getPredictedWords(
-        this.state.phraseLetters + keyLetters, this.state.phraseLength
-      )
+    if (phraseCode) {
+      const numberPhraseCode = phraseCode.replace(/\D/g, '')
+      console.log(numberPhraseCode)
+      this.getPredictedWords(numberPhraseCode)
     }
   }
 

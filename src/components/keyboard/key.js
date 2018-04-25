@@ -50,7 +50,7 @@ class Key extends Component {
     }
 
     this.reset()
-    this.props.onKeyUp(this.subtitle)
+    this.props.onKeyUp(this.title)
   }
 
   render () {
