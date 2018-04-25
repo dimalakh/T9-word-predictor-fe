@@ -55,7 +55,6 @@ class ScreenComponent extends Component {
 
     if (phraseCode) {
       const numberPhraseCode = phraseCode.replace(/\D/g, '')
-      console.log(numberPhraseCode)
       this.getPredictedWords(numberPhraseCode)
     }
   }
