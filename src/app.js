@@ -3,9 +3,9 @@ import './styles/app.sass'
 import React from 'react'
 import { render } from 'react-dom'
 
-import Screen from './components/screen'
+import PhoneKeyboard from './components/screen'
 
 render(
-  <Screen />,
+  <PhoneKeyboard />,
   document.querySelector('#root')
 )

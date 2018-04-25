@@ -9,6 +9,7 @@ class Key extends Component {
     this.handleKeyPress = this.handleKeyPress.bind(this)
     this.handleKeyUp = this.handleKeyUp.bind(this)
     this.reset = this.reset.bind(this)
+    this.state = { pressed: false }
   }
 
   reset () {
@@ -22,6 +23,7 @@ class Key extends Component {
   handleKeyPress () {
     const { symbols, onKeyPress, onSpacePress, onRemove } = this.props
 
+    this.setState({ pressed: true })
     onKeyPress(symbols[this.counter])
 
     if (!this.intervalId) {
@@ -42,6 +44,7 @@ class Key extends Component {
   }
 
   handleKeyUp () {
+    this.setState({ pressed: false })
     if (this.title === '0' && this.counter === 1) {
       return
     }
@@ -52,7 +55,7 @@ class Key extends Component {
 
   render () {
     return <div
-      className={this.intervalId ? 'key key-active' : 'key'}
+      className={this.state.pressed ? 'key-active' : 'key'}
       onMouseDown={this.handleKeyPress}
       onMouseUp={this.handleKeyUp}
       onMouseLeave={this.reset}
@@ -60,8 +63,8 @@ class Key extends Component {
       onTouchEnd={this.handleKeyUp}
     >
       <div className='key-content'>
-        <div className='key-title'>{ this.title }</div>
-        <div className='key-subtitle'>{ this.subtitle }</div>
+        { this.title && <div className='key-title'>{ this.title }</div> }
+        { this.subtitle && <div className='key-subtitle'>{ this.subtitle }</div> }
       </div>
     </div>
   }
