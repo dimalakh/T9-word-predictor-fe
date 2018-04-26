@@ -46,7 +46,7 @@ class Key extends Component {
   handleKeyUp () {
     this.setState({ pressed: false })
     if (this.title === '0' && this.counter === 1) {
-      return
+      return this.reset()
     }
 
     this.reset()
